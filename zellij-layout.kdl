@@ -1,0 +1,33 @@
+layout {
+    default_tab_template {
+        pane {
+            borderless true
+            plugin {
+                location "zellij:tab-bar"
+            }
+            size 1
+        }
+        children
+        pane {
+            borderless true
+            plugin {
+                location "zellij:status-bar"
+            }
+            size 2
+        }
+    }
+    tab focus=true name="Sandbox overview" {
+        pane command="sbx" {
+        }
+    }
+    tab name="agent" {
+        pane command="sbx" {
+            args "run" "--kit" "./kit" "pi"
+        }
+    }
+    // zou de moeite zijn hier Python dev env te extenden...
+    tab name="source" {
+        pane command="nvim" {
+        }
+    }
+}

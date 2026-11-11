@@ -22,7 +22,7 @@ layout {
     }
     tab name="agent" {
         pane command="sbx" {
-            args "run" "--kit" "./kit" "pi"
+            args "run" "--kit" "cursuskit" "pi"
         }
     }
     // zou de moeite zijn hier Python dev env te extenden...

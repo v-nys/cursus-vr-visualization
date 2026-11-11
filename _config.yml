@@ -1,0 +1,54 @@
+title: VR in Godot
+description: Een Nederlandstalige cursus over VR, beweging, interactie en shaders in Godot.
+lang: nl
+timezone: Etc/UTC
+url: ""
+baseurl: ""
+markdown: kramdown
+highlighter: rouge
+kramdown:
+  input: GFM
+  syntax_highlighter: rouge
+plugins:
+  - jekyll-relative-links
+relative_links:
+  enabled: true
+  collections: true
+
+defaults:
+  - scope:
+      path: ""
+    values:
+      layout: default
+
+navigation:
+  - title: Inleiding
+    url: /
+  - title: 2D-shaders
+    url: /shaders/
+  - title: Debugging
+    url: /debugging/
+  - title: Beweging
+    url: /beweging/
+  - title: Objectmanipulatie
+    url: /objectmanipulatie/
+  - title: Concepten
+    url: /concepten/
+
+exclude:
+  - AGENTS.md
+  - README.md
+  - Gemfile
+  - Gemfile.lock
+  - flake.nix
+  - flake.lock
+  - zellij-layout.kdl
+  - cursuskit
+  - voorbeeldmateriaal
+  - beweging/samenvatting.md
+  - scripts
+  - node_modules
+  - vendor
+  - .bundle
+  - .jekyll-cache
+  - .sass-cache

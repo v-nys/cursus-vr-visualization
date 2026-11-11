@@ -1,0 +1,40 @@
+schemaVersion: "1"
+kind: agent
+name: pi
+
+agent:
+  image: "docker/sandbox-templates:shell-docker"
+  entrypoint:
+    run: [pi]
+
+network:
+  allowedDomains:
+    - "registry.npmjs.org" # needed to install Pi and themes
+    - "host.docker.internal:1234" # what the agent accesses
+    - "localhost:1234" # where that access is routed
+    - "auth.docker.io" # Docker Hub
+    - "registry-1.docker.io" # Docker Hub
+    - "production.cloudfront.docker.com" # Docker Hub
+    - "pi.dev"
+    - "auth.openai.com" # for model
+    - "api.openai.com" # for model
+    - "chatgpt.com" # for model
+    - "mcr.microsoft.com" # for images
+    - "westeurope.data.mcr.microsoft.com" # for images
+    - "nixos.org" # for Nix package
+    - "releases.nixos.org" # for Nix package
+    - "channels.nixos.org" # for Nix package
+    - "api.github.com" # for Nix flake
+    - "github.com" # for Nix flake
+    - "codeload.github.com" # for Nix flake
+    - "cache.nixos.org" # for Nix flake
+    - "ftpmirror.gnu.org" # for Nix flake
+
+commands:
+  install:
+    - command: "curl -L --fail https://releases.nixos.org/nix/nix-2.24.10/install -o /tmp/nix-install.sh && sh /tmp/nix-install.sh --no-daemon"
+    - command: "mkdir -p /home/agent/.config/nix && printf '%s\\n' 'experimental-features = nix-command flakes' >> /home/agent/.config/nix/nix.conf"
+    - command: "npm install -g --ignore-scripts @earendil-works/pi-coding-agent"
+    - command: "pi install npm:pi-loop-police"
+    - command: "pi install npm:@smoose/pi-themes"
+

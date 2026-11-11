@@ -1,0 +1,178 @@
+{
+  "nodes": {
+    "flake-compat": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1777699697,
+        "narHash": "sha256-Eg9b/rq/ECYwNwEXs5i9wHyhxNI0JrYx2srdI2uZMaQ=",
+        "ref": "refs/heads/main",
+        "rev": "382052b74656a369c5408822af3f2501e9b1af81",
+        "revCount": 94,
+        "type": "git",
+        "url": "https://git.lix.systems/lix-project/flake-compat.git"
+      },
+      "original": {
+        "type": "git",
+        "url": "https://git.lix.systems/lix-project/flake-compat.git"
+      }
+    },
+    "mnw": {
+      "locked": {
+        "lastModified": 1784154424,
+        "narHash": "sha256-HRn4O1X2ShYtbq5Egji72/aemyc2cIQicjRZD9hBqM8=",
+        "owner": "Gerg-L",
+        "repo": "mnw",
+        "rev": "0151d9fa87992cbeb67c86616fb9170dcec830b6",
+        "type": "github"
+      },
+      "original": {
+        "owner": "Gerg-L",
+        "repo": "mnw",
+        "type": "github"
+      }
+    },
+    "my-nvf": {
+      "inputs": {
+        "nixpkgs": "nixpkgs",
+        "nixpkgs-unstable": "nixpkgs-unstable",
+        "nvf": "nvf"
+      },
+      "locked": {
+        "lastModified": 1794217712,
+        "narHash": "sha256-TB7StXK5tPJAWepXECndmWmDDuLaKaDaNWwLyDpjuQ0=",
+        "ref": "refs/heads/main",
+        "rev": "f65869b5fc905ec0e19d90273e0398491642e58f",
+        "revCount": 12,
+        "type": "git",
+        "url": "ssh://git@codeberg.org/v-nys/my-neovim-config-via-nvf.git"
+      },
+      "original": {
+        "type": "git",
+        "url": "ssh://git@codeberg.org/v-nys/my-neovim-config-via-nvf.git"
+      }
+    },
+    "nixpkgs": {
+      "locked": {
+        "lastModified": 1793865203,
+        "narHash": "sha256-/cpdPHaySDIyCgZI6EWngiM6jK3YLUNzv1b7lTzy6Bk=",
+        "owner": "NixOS",
+        "repo": "nixpkgs",
+        "rev": "c56a87d8e41ce69bd2af57eb35dcc117a9dfca33",
+        "type": "github"
+      },
+      "original": {
+        "owner": "NixOS",
+        "ref": "nixos-26.05",
+        "repo": "nixpkgs",
+        "type": "github"
+      }
+    },
+    "nixpkgs-unstable": {
+      "locked": {
+        "lastModified": 1794042290,
+        "narHash": "sha256-ziZn2PvCJE5JEEpqTdxXwJpPB+L3YqoCpTAMCzyaP3U=",
+        "owner": "NixOS",
+        "repo": "nixpkgs",
+        "rev": "f4a03c008967841f2a0b3cb7c436fc6fc31671f6",
+        "type": "github"
+      },
+      "original": {
+        "owner": "NixOS",
+        "ref": "nixos-unstable",
+        "repo": "nixpkgs",
+        "type": "github"
+      }
+    },
+    "nixpkgs_2": {
+      "locked": {
+        "lastModified": 1790046670,
+        "narHash": "sha256-OJe62m8gZx4xEAQnMcqH1u31/uu4Xf0q2ykAEHZfgrg=",
+        "rev": "6774f7bc253789b113a4f39285dc0fa100abeacc",
+        "type": "tarball",
+        "url": "https://releases.nixos.org/nixos/unstable/nixos-26.11pre1077996.6774f7bc2537/nixexprs.tar.xz"
+      },
+      "original": {
+        "type": "tarball",
+        "url": "https://channels.nixos.org/nixos-unstable/nixexprs.tar.xz"
+      }
+    },
+    "nvf": {
+      "inputs": {
+        "flake-compat": "flake-compat",
+        "mnw": "mnw",
+        "nixpkgs": "nixpkgs_2"
+      },
+      "locked": {
+        "lastModified": 1794159704,
+        "narHash": "sha256-2xkGsyT1C6+z9fx72VeRdmExCIOibm4q0Rk7mfKBCj0=",
+        "owner": "notashelf",
+        "repo": "nvf",
+        "rev": "c5a635adcd638bc1d5bc31098a2ba4b89bfe787b",
+        "type": "github"
+      },
+      "original": {
+        "owner": "notashelf",
+        "repo": "nvf",
+        "type": "github"
+      }
+    },
+    "python-dev-env": {
+      "inputs": {
+        "nixpkgs": [
+          "python-dev-env",
+          "terminal-dev-env",
+          "nixpkgs"
+        ],
+        "terminal-dev-env": "terminal-dev-env"
+      },
+      "locked": {
+        "lastModified": 1794219177,
+        "narHash": "sha256-baCjAouJxsekYCiKhhLAcfwaiR8PrQJeczKFoEKgJbo=",
+        "ref": "refs/heads/main",
+        "rev": "10176f4ad7a0337ef60b450821367ff8485e6a6c",
+        "revCount": 10,
+        "type": "git",
+        "url": "ssh://git@codeberg.org/v-nys/python-development-env.git"
+      },
+      "original": {
+        "type": "git",
+        "url": "ssh://git@codeberg.org/v-nys/python-development-env.git"
+      }
+    },
+    "root": {
+      "inputs": {
+        "nixpkgs": [
+          "python-dev-env",
+          "nixpkgs"
+        ],
+        "python-dev-env": "python-dev-env"
+      }
+    },
+    "terminal-dev-env": {
+      "inputs": {
+        "my-nvf": "my-nvf",
+        "nixpkgs": [
+          "python-dev-env",
+          "terminal-dev-env",
+          "my-nvf",
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1794217783,
+        "narHash": "sha256-rD176g2qkb6rn8jRGCCGmHztvgGHMDwvIoISSI1B/9E=",
+        "ref": "refs/heads/main",
+        "rev": "5aca7089231b5ae7763923d07d35977e1aa6c557",
+        "revCount": 13,
+        "type": "git",
+        "url": "ssh://git@codeberg.org/v-nys/terminal-development-env.git"
+      },
+      "original": {
+        "type": "git",
+        "url": "ssh://git@codeberg.org/v-nys/terminal-development-env.git"
+      }
+    }
+  },
+  "root": "root",
+  "version": 7
+}

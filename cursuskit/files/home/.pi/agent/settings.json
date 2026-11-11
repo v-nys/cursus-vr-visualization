@@ -1,0 +1,5 @@
+{
+    "theme": "everforest-dark",
+    "defaultProvider": "lmstudio",
+    "defaultModel": "prism-ml/bonsai-27b"
+}

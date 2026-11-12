@@ -226,23 +226,21 @@ Dicht bij recht omhoog of omlaag is een horizon niet eenduidig af te leiden. De 
 
 ### Beweging en rotatie afvlakken
 
-Voor de positie gebruiken we `lerp`; voor de basis gebruiken we `slerp`. Die laatste volgt een geleidelijke rotatie tussen de twee oriëntaties. We gaan uit van ongeschaalde cameratransforms, zoals in onze XR-opstelling.
+Voor de positie gebruiken we `lerp`; voor de basis gebruiken we `slerp`. Die eerste "vervormt" een vector geleidelijk terwijl die tweede hem in de eerste plaats "roteert".
 
 ```gdscript
-var weight := 1.0 - exp(-delta / maxf(smooth_delay, 0.001))
+var weight := 1.0 - delta / smooth_delay
 previous.origin = previous.origin.lerp(adjusted.origin, weight)
 previous.basis = previous.basis.slerp(adjusted.basis, weight)
 ```
 
 ```csharp
-float weight = 1.0f - Mathf.Exp(-(float)delta / Mathf.Max(SmoothDelay, 0.001f));
+float weight = 1.0f - (float)delta / SmoothDelay
 previous.Origin = previous.Origin.Lerp(adjusted.Origin, weight);
 previous.Basis = previous.Basis.Slerp(adjusted.Basis, weight);
 ```
 
-`smooth_delay` is hier een tijdconstante. Een grotere waarde geeft een trager beeld dat verder achterloopt. Na ongeveer één tijdconstante is circa 63 procent van een plots verschil weggewerkt; het is dus geen vaste vertraging waarna de camera ineens aankomt.
-
-De videocode gebruikt `delta / smooth_delay` als interpolatiefactor. Onze voorbeelden gebruiken de exponentiële vorm. Die blijft voor een positieve tijdstap tussen 0 en 1 en schiet bij een traag frame niet voorbij het doel.
+`smooth_delay` is hier een tijdconstante. Een grotere waarde geeft een trager beeld dat verder achterloopt.
 
 ### Terug naar wereldcoördinaten
 
@@ -330,8 +328,7 @@ Een breakpoint kan de simulatie volledig stilleggen. Doe zo'n proef met de spele
 4. Kantel je hoofd naar je schouder en kijk daarna omhoog. De first-person preview moet de horizon grotendeels recht houden, maar omhoog kijken wel behouden.
 5. Vergelijk `smooth_delay = 0.05` met `0.3`. Let zowel op de rust van het beeld als op het achterlopen.
 6. Verander de FOV van de first-person preview. Controleer dat de echte headsetprojectie en het buitenaanzicht daardoor niet veranderen.
-7. Test fade bij een muur. Laat het effect eerst in headset en first-person preview verschijnen en daarna alleen in de headset. Controleer dat het buitenaanzicht in beide gevallen bruikbaar blijft.
-8. Vergelijk de gemeten frametijd met en zonder first-person preview. Noteer welke configuratie je gebruikte, zodat de metingen vergelijkbaar blijven.
+7. Vergelijk de gemeten frametijd met en zonder first-person preview. Noteer welke configuratie je gebruikte, zodat de metingen vergelijkbaar blijven.
 
 Als uitbreiding kan je tussen meerdere vaste buitencamera's schakelen. Een andere oefening is een klein paneel met de afstand tussen hoofd en lichaam, de actieve comfortinstellingen en de actuele snelheid. Laat die waarden uit de bestaande speler komen; maak voor je debugpaneel geen tweede simulatie van de beweging.
 

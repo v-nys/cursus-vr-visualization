@@ -9,7 +9,6 @@ Referentie: Godot **4.5**. Geraadpleegd op **11 november 2026**.
 
 ## Gebruikte bronnen
 
-- De oorspronkelijke `links.md` en `samenvatting.md` zijn behouden.
 - De YouTube-pagina's van de drie video's zijn opgehaald. Titels, beschrijvingen en hoofdstuktijdstippen zijn gecontroleerd. De videobeschrijvingen verwijzen naar de overeenkomstige tutorialbranches.
 - De video-inhoud is uitgewerkt op basis van de aangeleverde notities, de hoofdstukbeschrijvingen en de bijbehorende GDScript-broncode. Er is geen volledig audiovisueel verslag of transcript gebruikt.
 - Van het tutorialproject zijn de fysieke controller uit deel 1 en 2 en de scène, lichaamscontroller, fysieke controller, bewegingsfuncties, effecten en shaders uit deel 3 geraadpleegd via `raw.githubusercontent.com`. De projectconfiguratie van deel 3 vermeldt Godot 4.4.

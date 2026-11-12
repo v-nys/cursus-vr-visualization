@@ -10,4 +10,3 @@ Hoe laat je het virtuele lichaam volgen wanneer de speler een echte stap zet? En
 - [Lees de cursustekst](cursus.md).
 - [Bekijk de concepten bij beweging](../concepten/README.md).
 - [Bronnen en controles](broncontrole.md).
-- [Oorspronkelijke werknotities](notities.md).

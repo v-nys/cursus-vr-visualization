@@ -202,6 +202,8 @@ Het woord "stabiliseren" betekent hier twee dingen: roll verwijderen en verander
 
 ### De horizon recht houden
 
+In het first-personbeeld willen we niet dat er "roll" aanwezig is. De first-personcamera moet naar hetzelfde punt kijken als de speler, maar de horizon moet links en rechts op het scherm op dezelfde hoogte getekend worden. We doen dit door het kijkpunt op te halen en een nieuwe oriëntatie te berekenen die naar hetzelfde punt kijkt, maar zonder roll.
+
 Neem de lokale transform van de XR-camera. De voorwaartse richting halen we uit de negatieve Z-as van haar basis. Met `Basis.looking_at` bouwen we daar een nieuwe oriëntatie bij, met de wereldwijde Y-richting als opwaartse referentie:
 
 ```gdscript
@@ -218,15 +220,15 @@ if (Mathf.Abs(forward.Dot(Vector3.Up)) < 0.999f)
     adjusted.Basis = Basis.LookingAt(forward, Vector3.Up);
 ```
 
-Hier behouden we zowel links/rechts kijken als omhoog/omlaag kijken. Wat verdwijnt, is **roll**: het schuin houden van het hoofd alsof je je oor naar je schouder brengt. In de oorspronkelijke code staat bij deze bewerking de commentaar "Remove pitch", maar de berekening verwijdert pitch niet. Ze maakt de horizon recht bij dezelfde kijkrichting.
+Hier behouden we zowel links/rechts kijken als omhoog/omlaag kijken. In de oorspronkelijke code staat bij deze bewerking de commentaar "Remove pitch", maar de berekening verwijdert pitch niet, ze verwijdert de roll. Dit komt omdat `looking_at` en nieuw driedimensionaal assenstelsel levert, waarvan de negatieve Z wijst naar het gekozen punt. De `Vector3.Up` geeft aan dat de "Y"-component van dit nieuwe assenstelsel **zo dicht mogelijk** bij de globale Y moet liggen, maar hij hoeft niet identiek te zijn. De harde beperking hier is dat het om een driedimensionale basis gaat, dus dat "X", "Y" en "Z" loodrecht op elkaar staan.
 
-Dat verschilt van de rotatiecode uit het bewegingshoofdstuk. Daar zetten we de Y-component van de kijkrichting op nul om het lichaam rechtop te laten staan. Hier doen we dat niet: de toeschouwer moet wel kunnen zien dat de speler naar een voorwerp op de grond kijkt.
-
-Dicht bij recht omhoog of omlaag is een horizon niet eenduidig af te leiden. De volledige voorbeelden behouden in dat geval de gemeten oriëntatie, na orthonormaliseren. Dat vermijdt een ongeldige `looking_at`, maar is geen volwaardig systeem voor een camera die voortdurend over die verticale grens heen draait.
+Wanneer de speler recht omhoog of omlaag kijkt, is een horizon niet eenduidig af te leiden. De volledige voorbeelden behouden in dat geval de oriëntatie. Dat vermijdt een ongeldige `looking_at`.
 
 ### Beweging en rotatie afvlakken
 
-Voor de positie gebruiken we `lerp`; voor de basis gebruiken we `slerp`. Die eerste "vervormt" een vector geleidelijk terwijl die tweede hem in de eerste plaats "roteert".
+We willen niet dat de first-personcamera even veel schudt als een VR-headset. Het valt misschien niet zo wanneer je een headset op hebt, maar eigenlijk schudden we voortdurend een beetje met ons hoofd. Als we dat soort effect zien op een scherm dat zelf stil hangt, kan dat misselijkheid opleveren.
+
+We zullen dus zowel de translatie als de rotatie van onze XRCamera3D geleidelijk bijbenen. Voor de positie gebruiken we `lerp`; voor de basis gebruiken we `slerp`. Die eerste "vervormt" een vector geleidelijk terwijl die tweede hem in de eerste plaats "roteert".
 
 ```gdscript
 var weight := 1.0 - delta / smooth_delay
@@ -240,7 +242,7 @@ previous.Origin = previous.Origin.Lerp(adjusted.Origin, weight);
 previous.Basis = previous.Basis.Slerp(adjusted.Basis, weight);
 ```
 
-`smooth_delay` is hier een tijdconstante. Een grotere waarde geeft een trager beeld dat verder achterloopt.
+`smooth_delay` is hier een tijdconstante. Een grotere waarde geeft een trager beeld dat verder achterloopt. We houden onze nieuwe oorsprong en basis (voor translatie en rotatie) bij in variabelen, omdat we in het volgende frame opnieuw vanaf deze waarden willen gaan interpoleren. Voor het allereerste frame nemen we gewoon de waarde zonder interpolatie.
 
 ### Terug naar wereldcoördinaten
 

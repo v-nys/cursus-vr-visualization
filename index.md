@@ -27,6 +27,6 @@ De gameplayvoorbeelden staan waar relevant in GDScript en C#. De shadercode blij
 
 AI-gegenereerde uitleg en code kunnen fouten, onvolledigheden of verkeerde aannames bevatten. Bronverwijzingen en documentatiecontroles zijn geen garantie dat een voorbeeld in elk project werkt. De codevoorbeelden zijn tijdens het schrijven niet in Godot gecompileerd of met een headset uitgevoerd. Gebruik ze daarom als leermateriaal en controleer het gedrag zelf in de genoemde versies.
 
-Per onderdeel staat beschreven welke bronnen zijn geraadpleegd en welke controles wel en niet zijn uitgevoerd: [shaders](shaders/broncontrole.md), [debugging](debugging/broncontrole.md), [beweging](beweging/broncontrole.md), [objectmanipulatie](objectmanipulatie/broncontrole.md) en [concepten](concepten/broncontrole.md). Niet elke video is integraal bekeken; waar de uitwerking op hoofdstukbeschrijvingen en bijbehorende broncode steunt, staat dat daar expliciet vermeld.
+De hoofdstukken en conceptpagina’s verwijzen naar de gebruikte bronnen. Niet elke video is integraal bekeken; de uitwerking steunt ook op hoofdstukbeschrijvingen en bijbehorende broncode.
 
 Het doel is dat je de werking zelf kan verklaren en onderzoeken. Neem code niet alleen over omdat ze overtuigend wordt uitgelegd: probeer de oefeningen uit, vergelijk met de bronnen en stel je verklaring bij wanneer het resultaat niet overeenkomt met je verwachting.

@@ -46,9 +46,15 @@ exclude:
   - cursuskit
   - voorbeeldmateriaal
   - beweging/samenvatting.md
+  - beweging/notities.md
   - scripts
   - node_modules
   - vendor
   - .bundle
   - .jekyll-cache
   - .sass-cache
+  - beweging/broncontrole.md
+  - debugging/broncontrole.md
+  - shaders/broncontrole.md
+  - objectmanipulatie/broncontrole.md
+  - concepten/broncontrole.md

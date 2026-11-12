@@ -58,7 +58,11 @@ def main():
             elif url.fragment and target in pages and unquote(url.fragment) not in pages[target].ids:
                 errors.append(f'{source.relative_to(root)}: ontbrekend anker in {link}')
     for private in ('cursuskit', 'voorbeeldmateriaal', 'AGENTS.md', 'flake.nix', 'flake.lock',
-                    'zellij-layout.kdl', 'scripts', 'beweging/samenvatting.md'):
+                    'zellij-layout.kdl', 'scripts', 'beweging/samenvatting.md',
+                    'beweging/notities.md', 'beweging/notities.html',
+                    'beweging/broncontrole.html',
+                    'debugging/broncontrole.html', 'shaders/broncontrole.html',
+                    'objectmanipulatie/broncontrole.html', 'concepten/broncontrole.html'):
         if (root / private).exists():
             errors.append(f'Niet voor publicatie bedoeld bestand aanwezig: {private}')
     for error in errors:

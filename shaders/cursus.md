@@ -215,4 +215,4 @@ Krijg je een foutmelding, controleer dan eerst het shadertype, de puntkomma's en
 | [CanvasItem shaders](https://docs.godotengine.org/en/4.5/tutorials/shaders/shader_reference/canvas_item_shader.html) | Precieze betekenis van `COLOR`, `VERTEX`, `UV` en `unshaded` in Godot 4.5. |
 | [Shading language](https://docs.godotengine.org/en/4.5/tutorials/shaders/shader_reference/shading_language.html) | Types, uniforms, kleurhints en Inspectorhints. |
 
-De afbeeldingen zijn afkomstig uit de officiële documentatie onder CC BY 3.0. Zie [afbeeldingen/BRONNEN.md](afbeeldingen/BRONNEN.md). De herkomst en de uitgevoerde controles staan in [broncontrole.md](broncontrole.md). De voorbeelden zijn niet in Godot uitgevoerd.
+De afbeeldingen zijn afkomstig uit de officiële documentatie onder CC BY 3.0. Zie [afbeeldingen/BRONNEN.md](afbeeldingen/BRONNEN.md). De voorbeelden zijn niet in Godot uitgevoerd.

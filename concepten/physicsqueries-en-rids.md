@@ -5,7 +5,7 @@ section_url: /concepten/
 ---
 # Physicsqueries, collision masks en RIDs
 
-Een collider geeft niet automatisch controle over een door tracking bewogen camera. De hoofdcontrole uit de notities stelt daarom een andere vraag: "Zou een bol langs dit pad een obstakel raken?" Een physicsquery kan die vraag beantwoorden zonder een nieuw fysiek hoofd te simuleren.
+Een collider geeft niet automatisch controle over een door tracking bewogen camera. De hoofdcontrole stelt daarom de vraag: "Zou een bol langs dit pad een obstakel raken?" Een physicsquery kan die vraag beantwoorden zonder een nieuw fysiek hoofd te simuleren.
 
 ## Beschrijf eerst de vraag
 

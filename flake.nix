@@ -1,5 +1,5 @@
 {
-  description = "Here to Slay Flask application and Playwright tests";
+  description = "Ontwikkelomgeving voor de cursus VR in Godot en de Jekyll-site";
 
   inputs = {
     nixpkgs.follows = "python-dev-env/nixpkgs";
@@ -20,6 +20,9 @@
         "x86_64-linux".default = python-dev-env.lib.mkDevShellWithExtras ({
           packagesIncludingPython = [
             pkgs.python3
+            pkgs.rubyPackages.jekyll
+            pkgs.rubyPackages.kramdown-parser-gfm
+            pkgs.rubyPackages.jekyll-relative-links
             pkgs.python3Packages.flask
             pkgs.python3Packages.jinja2
             pkgs.nodejs

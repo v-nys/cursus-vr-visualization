@@ -13,7 +13,7 @@ Dat maakt een eenvoudige fout soms verrassend moeilijk te onderzoeken. De speler
 
 In deze les bouwen we daarom een **spectator view**: een bureaubladvenster waarmee je de speler van buitenaf volgt. In een kleine first-person preview tonen we ook een rustiger firstpersonbeeld. Zo kan iemand in VR testen, terwijl iemand anders kijkt naar wat de verschillende onderdelen doen.
 
-We volgen de video [Godot XR Spectator View](https://www.youtube.com/watch?v=VvTLP3neEbg) van Bastiaan Olij. De eigenlijke uitleg begint rond 0:53; de korte aankondigingen ervoor zijn geen onderdeel van deze les. Er waren voor dit hoofdstuk geen voorafgaande notities. De uitwerking steunt op de hoofdstukbeschrijvingen en de [bijbehorende broncode](https://github.com/BastiaanOlij/godot4_tutorial/tree/spectator_view), aangevuld met de officiële documentatie.
+We volgen de video [Godot XR Spectator View](https://www.youtube.com/watch?v=VvTLP3neEbg) van Bastiaan Olij. De eigenlijke uitleg begint rond 0:53; de korte aankondigingen ervoor zijn geen onderdeel van deze les. De uitwerking steunt op de hoofdstukbeschrijvingen en de [bijbehorende broncode](https://github.com/BastiaanOlij/godot4_tutorial/tree/spectator_view), aangevuld met de officiële documentatie.
 
 Net als bij het [hoofdstuk beweging](../beweging/cursus.md) gebruiken we **Godot 4.5** als referentie. De tutorialbroncode vermeldt Godot 4.4. Voor C# heb je de .NET-uitgave van Godot nodig. Je vertrekt van een werkende XR-hoofdscène; deze les vervangt haar OpenXR-opstartcode en bewegingscontroller niet.
 
@@ -136,8 +136,6 @@ public override void _Process(double delta)
 ```
 
 Dat verandert de richting, niet de positie van de camera. De camera blijft dus op haar statief staan en draait mee om de speler in beeld te houden. Dat is voldoende voor een kleine testruimte. In een groter level zal je ook de positie moeten aanpassen of verschillende camerastandpunten voorzien.
-
-De volledige scripts [third_person_camera.gd](code/gdscript/third_person_camera.gd) en [ThirdPersonCamera.cs](code/csharp/ThirdPersonCamera.cs) controleren ook of doel en camera bijna samenvallen. Verder kiezen ze een andere opwaartse referentie wanneer het doel bijna recht boven of onder de camera staat. `look_at` kan uit een nulrichting of uit twee parallelle richtingassen immers geen bruikbare oriëntatie opbouwen.
 
 ## Zichtbaarheid regelen met renderlagen
 
@@ -351,4 +349,4 @@ Als uitbreiding kan je tussen meerdere vaste buitencamera's schakelen. Een ander
 
 De oorspronkelijke videolink blijft bewaard in [links.md](links.md). De drie screenshots komen uit de officiële Godot-documentatie onder CC BY 3.0; zie [afbeeldingen/BRONNEN.md](afbeeldingen/BRONNEN.md). De code is een bewerking en C#-vertaling van de MIT-gelicentieerde tutorial; de [oorspronkelijke licentie](code/LICENSE-Bastiaan-Olij.txt) is bijgevoegd.
 
-De voorbeelden zijn niet uitgevoerd in Godot of met een headset. Welke bronnen en controles wel zijn gebruikt, staat in [broncontrole.md](broncontrole.md).
+De voorbeelden zijn niet uitgevoerd in Godot of met een headset.

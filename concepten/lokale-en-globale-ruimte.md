@@ -5,7 +5,7 @@ section_url: /concepten/
 ---
 # Lokale en globale ruimte
 
-In de bewegingsnotities staat dezelfde camerapositie soms in de ruimte van de origin, soms in die van het lichaam en soms in wereldruimte. Dat zijn geen verschillende camera's: het zijn verschillende beschrijvingen van hetzelfde punt.
+In de bewegingscode beschrijven we dezelfde camerapositie soms in de ruimte van de origin, soms in die van het lichaam en soms in wereldruimte. Dat zijn geen verschillende camera's: het zijn verschillende beschrijvingen van hetzelfde punt.
 
 ## Ten opzichte van wat?
 

@@ -116,7 +116,7 @@ var movement_local: Vector3 = global_basis.inverse() * movement_world
 Vector3 movementLocal = GlobalBasis.Inverse() * movementWorld;
 ```
 
-Dat beantwoordt meteen een vraag uit de bronnotities: `move_and_collide` verwacht een **verplaatsing in wereldcoördinaten**. `velocity` is ook een wereldvector, maar stelt een snelheid in meter per seconde voor. `move_and_slide()` gebruikt die snelheid en verwerkt de physics-tijdstap zelf. Vermenigvuldig `velocity` dus niet nog eens met `delta` wanneer je `move_and_slide()` oproept.
+`move_and_collide` verwacht een **verplaatsing in wereldcoördinaten**. `velocity` is ook een wereldvector, maar stelt een snelheid in meter per seconde voor. `move_and_slide()` gebruikt die snelheid en verwerkt de physics-tijdstap zelf. Vermenigvuldig `velocity` dus niet nog eens met `delta` wanneer je `move_and_slide()` oproept.
 
 ## Het lichaam laten volgen
 
@@ -629,7 +629,7 @@ Fysiek rechtstaan onder een laag plafond blijft een bijzonder geval. De camera w
 
 *Video 3, 7:22–12:59.*
 
-Dit was het ontbrekende stuk in de aangeleverde notities. Een `CharacterBody3D` met een capsule over de volledige lichaamslengte botst tegen de voorkant van een trede. `move_and_slide()` schuift langs botsingsvlakken, maar is geen automatische stap-op-de-trapfunctie. Ook `floor_snap_length` is vooral bedoeld om contact met de vloer te behouden; het tilt ons niet vanzelf over elke verticale rand.
+Een `CharacterBody3D` met een capsule over de volledige lichaamslengte botst tegen de voorkant van een trede. `move_and_slide()` schuift langs botsingsvlakken, maar is geen automatische stap-op-de-trapfunctie. Ook `floor_snap_length` is vooral bedoeld om contact met de vloer te behouden; het tilt ons niet vanzelf over elke verticale rand.
 
 De video verandert daarom de voorstelling van het lichaam. De capsule stelt voortaan alleen het **bovenlichaam** voor. Voor de benen en de ondersteuning op de vloer gebruiken we een raycast.
 
@@ -722,7 +722,7 @@ Begin met `use_stair_support = false`. De capsule loopt dan tot de voeten en je 
 
 Roep na bevestiging op je startscherm de kalibratiemethode op als je een vaste avatarhoogte wil. De scripts initialiseren OpenXR niet opnieuw en maken geen startscherm aan; ze sluiten aan op de reeds werkende XR-basis van deze les.
 
-De code is een cursusvoorbeeld dat de videotechnieken samenbrengt, met enkele genoemde aanpassingen: één physicslus, begrensde interpolatie, controles van de begin- en eindoverlap van het hoofd en een expliciet draaipunt. Het is geen vervanging voor testen op je doelheadset. De voorbeelden zijn hier niet uitgevoerd in Godot of met XR-hardware; de controle van deze uitwerking is beschreven in [broncontrole.md](broncontrole.md).
+De code is een cursusvoorbeeld dat de videotechnieken samenbrengt, met enkele genoemde aanpassingen: één physicslus, begrensde interpolatie, controles van de begin- en eindoverlap van het hoofd en een expliciet draaipunt. Het is geen vervanging voor testen op je doelheadset. De voorbeelden zijn hier niet uitgevoerd in Godot of met XR-hardware.
 
 ## Zelf uitproberen
 
@@ -740,7 +740,7 @@ Als uitbreiding kan je een VR-instellingenmenu maken. Laat de speler de beweging
 
 ## Bronnen
 
-De oorspronkelijke werknotities blijven bewaard in [samenvatting.md](notities.md), de videolinks in [links.md](links.md). Voor deze tekst zijn de videohoofdstukken en de bijbehorende broncode geraadpleegd; de API's en versieverschillen zijn vergeleken met de officiële documentatie.
+Voor deze tekst zijn de videohoofdstukken en de bijbehorende broncode geraadpleegd; de API's en versieverschillen zijn vergeleken met de officiële documentatie.
 
 | Bron | Waarvoor gebruikt? |
 | --- | --- |

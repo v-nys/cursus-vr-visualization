@@ -5,7 +5,7 @@ section_url: /concepten/
 ---
 # Reverse Z
 
-De notities markeren reverse Z als open vraag omdat de fullscreenvertexshader een specifieke Z-waarde schrijft. Dat is versiegevoelig: Godot veranderde deze conventie in versie 4.3.
+Een fullscreenvertexshader schrijft een specifieke Z-waarde om het effect op de juiste diepte te tekenen. Dat is versiegevoelig: Godot veranderde deze conventie in versie 4.3.
 
 ## Wat houdt een depthbuffer bij?
 

@@ -5,7 +5,7 @@ section_url: /concepten/
 ---
 # Vectoren en projecties
 
-De notities vragen of `project()` de snelheid omzet naar lokale ruimte. Dat doet de methode niet. Om dat te begrijpen moeten we een vector onderscheiden van de component die langs een gekozen as ligt.
+`project()` berekent de component van een vector langs een andere vector. De methode zet de snelheid niet om naar lokale ruimte. Om dat te begrijpen moeten we een vector onderscheiden van de component die langs een gekozen as ligt.
 
 ## Richting en lengte
 

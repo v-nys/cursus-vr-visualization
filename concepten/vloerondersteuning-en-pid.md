@@ -5,7 +5,7 @@ section_url: /concepten/
 ---
 # Vloerondersteuning en een PID-regelaar
 
-De oorspronkelijke samenvatting stopt bij de trapoplossing. De bijbehorende tutorialbroncode gebruikt een bovenlichaamscapsule, een neerwaartse raycast en een regelaar voor de verticale ondersteuning. Dit is dus een aanvulling op dat ontbrekende stuk, niet een reeds uitgeschreven onderdeel van de notities.
+Om trappen te kunnen oplopen gebruikt de tutorialbroncode een bovenlichaamscapsule, een neerwaartse raycast en een regelaar voor de verticale ondersteuning.
 
 ## Waarom geen gewone volledige capsule?
 

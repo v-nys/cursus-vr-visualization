@@ -13,7 +13,7 @@ We zullen die vragen één voor één oplossen met **Godot XR Tools**. Eerst mak
 
 Deze les volgt [Godot XR Tools Parts 1–4 van Bastiaan Olij](links.md). De oorspronkelijke tutorialcode gebruikt Godot 3. Wij richten ons op **Godot 4.5 met XR Tools 4.5.1**, een release uit de 4.5-reeks die Godot 4.4 of nieuwer vereist. In Godot 4 heten de nodes onder meer `Node3D`, `RigidBody3D` en `XRController3D`. Een scène maak je aan met `instantiate()`; in C# met `Instantiate()`. Gebruik daarom de huidige addon-scènes en geen losse scripts uit het oude project.
 
-We veronderstellen dat OpenXR al werkt. De headset en controllers worden gevolgd, de vloer heeft een collider en één Godot-eenheid stelt één meter voor. Raadpleeg zo nodig [Setting up XR](https://docs.godotengine.org/en/4.5/tutorials/xr/setting_up_xr.html). Voor C# gebruik je de .NET-uitgave. De voorbeelden zijn lescomponenten; ze zijn niet in Godot of met een headset uitgevoerd. De [broncontrole](broncontrole.md) beschrijft waarop de uitwerking steunt.
+We veronderstellen dat OpenXR al werkt. De headset en controllers worden gevolgd, de vloer heeft een collider en één Godot-eenheid stelt één meter voor. Raadpleeg zo nodig [Setting up XR](https://docs.godotengine.org/en/4.5/tutorials/xr/setting_up_xr.html). Voor C# gebruik je de .NET-uitgave. De voorbeelden zijn lescomponenten; ze zijn niet in Godot of met een headset uitgevoerd.
 
 ## De bibliotheek toevoegen
 

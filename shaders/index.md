@@ -9,4 +9,3 @@ Drie eenvoudige 2D-voorbeelden tonen hoe je kleuren met een fragmentshader en ho
 
 - [Lees de cursustekst](cursus.md).
 - [Bekijk de voorbeeldbestanden](code/index.md).
-- [Bronnen en controles](broncontrole.md).

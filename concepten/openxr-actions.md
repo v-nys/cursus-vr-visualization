@@ -5,7 +5,7 @@ section_url: /concepten/
 ---
 # OpenXR-actions en controllerprofielen
 
-In de notities is de action map een "contract" met OpenXR. Dat is een bruikbaar beeld: de applicatie benoemt welke betekenisvolle invoer ze nodig heeft, zonder rechtstreeks aan één controllermerk vast te hangen.
+Je kan de action map zien als een "contract" met OpenXR. Dat is een bruikbaar beeld: de applicatie benoemt welke betekenisvolle invoer ze nodig heeft, zonder rechtstreeks aan één controllermerk vast te hangen.
 
 ## Van apparaat naar bedoeling
 
@@ -34,7 +34,7 @@ De controllertracker bepaalt van welke hand we de waarde opvragen. Voor onze loc
 
 Het Simple Controller-profiel is een minimale terugval, maar heeft geen thumbstick. Het kan dus niet al onze bewegingsacties ondersteunen. Voor hardware zonder geschikte invoer heb je een andere interactie nodig, bijvoorbeeld teleportatie of een bevestigingsknop.
 
-De runtime kan beschikbare of door de gebruiker aangepaste bindings kiezen, maar je kan niet op een willekeurige profielnabootsing vertrouwen. Test de apparaten waarvoor je ondersteuning belooft. Het advies uit de notities om alleen op een ander profiel te vertrouwen is geen vervanging voor dat testen.
+De runtime kan beschikbare of door de gebruiker aangepaste bindings kiezen, maar je kan niet op een willekeurige profielnabootsing vertrouwen. Test de apparaten waarvoor je ondersteuning belooft. Alleen op een ander profiel vertrouwen is geen vervanging voor dat testen.
 
 ## Acties versus instellingen
 

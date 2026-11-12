@@ -5,7 +5,7 @@ section_url: /concepten/
 ---
 # Een basis: de assen van een node
 
-In de notities komt vaak `.basis.z` voor. Dat is geen apart opgeslagen kijkhoek. Het is één van de drie assen waarmee een node zijn eigen ruimte beschrijft.
+In de bewegingscode gebruiken we vaak `.basis.z`. Dat is geen apart opgeslagen kijkhoek. Het is één van de drie assen waarmee een node zijn eigen ruimte beschrijft.
 
 ## Drie kolommen met betekenis
 

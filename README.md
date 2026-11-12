@@ -6,7 +6,7 @@ Nederlandstalig cursusmateriaal voor Godot 4.5. De [startpagina](index.md) bevat
 
 De inhoud blijft in de bestaande hoofdstukmappen. `cursus.md` bevat telkens de les; afbeeldingen, code en broncontrole staan ernaast. De concepten zijn bereikbaar via `concepten/README.md`. Jekyll bouwt de Markdownpagina's om naar HTML; de plugin `jekyll-relative-links` zet onderlinge Markdownlinks om naar de gepubliceerde pagina's.
 
-De originele bewegingsnotities blijven in `beweging/samenvatting.md`. Ze worden via `beweging/notities.md` als brontekst weergegeven, omdat de oorspronkelijke afbeeldingslinks naar een persoonlijke notitieomgeving verwijzen.
+De originele bewegingsnotities blijven in `beweging/samenvatting.md`. Deze bronnotities en de broncontroleverslagen blijven buiten de gebouwde site.
 
 ## Publiceren op GitHub Pages
 
@@ -20,23 +20,23 @@ Er is vanuit deze werkomgeving nog niets op GitHub gepubliceerd.
 
 ## Lokaal bekijken
 
-Gebruik Ruby en Jekyll met de plugin `jekyll-relative-links`. De site gebruikt alleen functionaliteit die ook door GitHub Pages wordt ondersteund. Bijvoorbeeld:
+Start de Nix-ontwikkelomgeving. Die bevat Jekyll met de plugin `jekyll-relative-links` en Python voor de linkcontrole:
 
 ```sh
-gem install jekyll -v '~> 3.10'
-gem install jekyll-relative-links -v '~> 0.7'
-gem install webrick
+nix develop
+./scripts/build.sh
 jekyll serve --host 0.0.0.0 --baseurl ''
 ```
 
 Open daarna poort 4000 in je browser. In een sandbox moet die poort eventueel eerst naar de host worden gepubliceerd.
 
-Een build onder een repositorypad controleren kan met:
+Het buildscript schrijft naar `_site/` en controleert daarna lokale links, ankers en uitgesloten werkbestanden. Bij een fout stopt het met een foutcode. Je kan het script vanuit elke map aanroepen. Zonder argument gebruikt het een leeg baseurl; voor een repositorypad geef je dat pad mee:
 
 ```sh
-jekyll build --baseurl /cursus-vr-visualization
-python3 scripts/check_site.py _site --baseurl /cursus-vr-visualization
+./scripts/build.sh /cursus-vr-visualization
 ```
+
+Om beide URL-varianten te controleren voer je beide buildcommando's uit. Elke build vervangt de vorige inhoud van `_site/`. Het script publiceert niets. Zonder Nix heb je Jekyll, de Ruby-plugin `jekyll-relative-links` en Python 3.9 of nieuwer nodig.
 
 Mermaid-diagrammen worden in de browser weergegeven met een vastgezette versie van Mermaid via jsDelivr. Als die externe dienst geblokkeerd is, blijft de diagramcode als tekst beschikbaar. De SVG-diagrammen en alle cursusafbeeldingen staan lokaal.
 
@@ -44,4 +44,4 @@ Alleen de cursus en de benodigde sitebestanden worden gepubliceerd. Werkomgeving
 
 ## Lokale verificatie
 
-Op 11 november 2026 is de site met Jekyll 4.4.1 gebouwd, zowel zonder projectpad als onder `/cursus-vr-visualization`. De controle vond in beide builds 60 HTML-pagina's en 1.039 lokale verwijzingen, zonder problemen. De officiële GitHub Actions-build is nog niet uitgevoerd. Browserweergave, Mermaid-rendering en Godot-code zijn hier niet uitgevoerd; de hoofdstukken vermelden hun verdere verificatiegrenzen.
+Op 12 november 2026 is de site met Jekyll 4.4.1 gebouwd, zowel zonder projectpad als onder `/cursus-vr-visualization`. De controle vond in beide builds 53 HTML-pagina's en 882 lokale verwijzingen, zonder problemen. De officiële GitHub Actions-build is nog niet uitgevoerd. Browserweergave, Mermaid-rendering en Godot-code zijn hier niet uitgevoerd; de startpagina en hoofdstukken vermelden de verificatiegrenzen.

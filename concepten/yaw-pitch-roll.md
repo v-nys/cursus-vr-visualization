@@ -5,7 +5,7 @@ section_url: /concepten/
 ---
 # Yaw, pitch en roll
 
-"Tilt negeren" is te vaag om rotatiecode te begrijpen. In de notities moeten we twee verschillende bewerkingen uit elkaar houden: het lichaam rechtop laten staan en een camerabeeld met een rechte horizon maken.
+Bij rotatiecode onderscheiden we twee bewerkingen: het lichaam rechtop laten staan en een camerabeeld met een rechte horizon maken.
 
 ## Drie soorten draaien
 

@@ -5,7 +5,7 @@ section_url: /concepten/
 ---
 # Shaderfasen, uniforms en varyings
 
-De notities gebruiken tegelijk vertexcode, fragmentcode, uniforms en een `varying dist`. Die namen beschrijven verschillende plaatsen en manieren waarop gegevens in de renderpipeline bewegen.
+Voor de vignette gebruiken we vertexcode, fragmentcode, uniforms en een `varying dist`. Die namen beschrijven verschillende plaatsen en manieren waarop gegevens in de renderpipeline bewegen.
 
 ## Eerst geometrie, dan fragmenten
 

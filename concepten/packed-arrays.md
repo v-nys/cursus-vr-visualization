@@ -5,13 +5,13 @@ section_url: /concepten/
 ---
 # Packed arrays
 
-De notities vragen wat een `PackedStringArray` is. Verderop verschijnen ook `PackedVector3Array` en `PackedInt32Array`. Het basisidee is hetzelfde: een compacte reeks waarden van één bepaald type.
+In de bewegingscode gebruiken we `PackedStringArray`, `PackedVector3Array` en `PackedInt32Array`. Het basisidee is hetzelfde: een compacte reeks waarden van één bepaald type.
 
 ## Niet elk lijsttype is hetzelfde
 
 Een gewone `Array` is flexibel en kan verschillende waarden bevatten. Een getypeerde `Array[Vector3]` beperkt welke elementen je erin stopt. Een `PackedVector3Array` is een daarvoor speciaal opgeslagen reeks vectoren. Packed arrays kunnen minder geheugen en overhead vragen voor veel gelijksoortige gegevens.
 
-| GDScript | Inhoud | Voorbeeld uit de notities |
+| GDScript | Inhoud | Voorbeeld |
 | --- | --- | --- |
 | `PackedStringArray` | Strings | Configuratiewaarschuwingen. |
 | `PackedVector3Array` | 3D-vectoren | Vertexposities. |

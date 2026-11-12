@@ -5,7 +5,7 @@ section_url: /concepten/
 ---
 # Beweging, snelheid en physics
 
-De notities mengen een gewenste positie, een verplaatsing en `velocity`. Dat zijn drie verschillende grootheden. De eenheden helpen om fouten te herkennen.
+Een gewenste positie, een verplaatsing en `velocity` zijn drie verschillende grootheden. De eenheden helpen om fouten te herkennen.
 
 ## Meter of meter per seconde?
 

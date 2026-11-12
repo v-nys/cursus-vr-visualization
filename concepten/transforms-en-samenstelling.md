@@ -19,7 +19,7 @@ De basis draait of schaalt het punt; de oorsprong verplaatst het daarna. Voor ee
 
 ## Van camera naar lichaam
 
-De bewegingsnotities gebruiken deze scèneboom:
+Het bewegingshoofdstuk gebruikt deze scèneboom:
 
 ```mermaid
 flowchart LR

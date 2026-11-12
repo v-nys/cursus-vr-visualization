@@ -40,7 +40,7 @@ Vector3 localMovement = GlobalBasis.Inverse() * worldMovement;
 
 Een schaal van nul drukt een richting helemaal plat. De oorspronkelijke waarde is daarna niet meer terug te halen: er bestaat geen bruikbare inverse. Voor de XR-opstelling vermijden we sowieso schaal op de rig.
 
-## De tegenbeweging uit de notities
+## De tegenbeweging van de origin
 
 Stel dat het lichaam door fysieke beweging werkelijk `world_movement` is opgeschoven. De origin moet dat in de tegenovergestelde richting compenseren. Je kan op twee consistente manieren werken:
 

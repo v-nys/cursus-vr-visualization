@@ -5,7 +5,7 @@ section_url: /concepten/
 ---
 # Procedurele meshes: vertices, indices en kanalen
 
-De vignette uit de notities is een ring die in code wordt opgebouwd. Een mesh is daarbij niet alleen een lijst punten. Je moet ook beschrijven welke punten samen driehoeken vormen.
+De vignette uit het bewegingshoofdstuk is een ring die in code wordt opgebouwd. Een mesh is daarbij niet alleen een lijst punten. Je moet ook beschrijven welke punten samen driehoeken vormen.
 
 ## Punten hergebruiken met indices
 

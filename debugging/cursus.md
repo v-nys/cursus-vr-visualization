@@ -300,33 +300,6 @@ De slider verandert alleen onze gewone insetcamera. De headset gebruikt een door
 
 In de volledige code gebeurt het instellen van de beginwaarde met `set_value_no_signal` / `SetValueNoSignal`. Zo zetten we de slider op de camerawaarde zonder tijdens de initialisatie al een wijzigingssignaal af te handelen. Verbind het signaal niet nog eens via de editor wanneer je het meegeleverde script gebruikt; dat script regelt de koppeling zelf.
 
-## De volledige voorbeelden aansluiten
-
-De volgende bestanden vormen samen één spectatoropstelling. Kies per node de GDScript- of de C#-versie, niet beide tegelijk.
-
-| Node | GDScript | C# |
-| --- | --- | --- |
-| `SpectatorView` | [spectator_view.gd](code/gdscript/spectator_view.gd) | [SpectatorView.cs](code/csharp/SpectatorView.cs) |
-| `ThirdPersonCamera` | [third_person_camera.gd](code/gdscript/third_person_camera.gd) | [ThirdPersonCamera.cs](code/csharp/ThirdPersonCamera.cs) |
-| `StabilizedCamera` | [stabilized_camera.gd](code/gdscript/stabilized_camera.gd) | [StabilizedCamera.cs](code/csharp/StabilizedCamera.cs) |
-
-Maak eerst de scèneboom zoals eerder beschreven. Het root-script maakt de nodes niet zelf aan. Koppel in de Inspector de volgende referenties:
-
-| Veld op de root | Te koppelen node |
-| --- | --- |
-| `hmd` / `Hmd` | De subviewport waarin `Main` staat. |
-| `first_person_viewport` / `FirstPersonViewport` | De subviewport van de first-person preview. |
-| `xr_camera` / `XrCamera` | De bestaande XR-camera in `Main`. |
-| `third_person_camera` / `ThirdPersonCamera` | De camera van het buitenaanzicht. |
-| `inset_camera` / `InsetCamera` | De gestabiliseerde camera in de first-person preview. |
-| `fov_slider` / `FovSlider` | De HSlider onder het frame. |
-
-Koppel daarnaast `target` / `Target` op de buitencamera aan het hoofd en `xr_camera` / `XrCamera` op de gestabiliseerde camera aan de XR-camera. Als `Main` een geneste scene instance is, kan **Editable Children** helpen om de juiste nodes te selecteren; je hoeft daarvoor geen tweede speler aan te maken.
-
-Het root-script stelt de gedeelde wereld, camera-cullmasks, actieve camera's en slider in. Het schakelt XR uit voor het desktopbeeld en de first-person preview. De bestaande opstartcode van `Main` blijft verantwoordelijk voor OpenXR en voor het inschakelen van XR op de HMD-viewport. Renderlagen van meshes stel je zelf in volgens de tabel: de scripts kunnen niet raden welke mesh een debugcapsule of een comforteffect is.
-
-De camerabestanden gebruiken procesprioriteit 10, zodat ze na de gebruikelijke gameplay-`_process` met prioriteit 0 draaien. Heb je een eigen camerasysteem of andere prioriteiten, stem die volgorde dan af. Dit verandert niet de late pose-updates die de XR-rendering zelf kan uitvoeren; verwacht geen pixelgelijke weergave van het headsetbeeld.
-
 ## Met deze opstelling fouten onderzoeken
 
 Het doel is niet alleen een mooi beeld te maken. We willen hypotheses kunnen controleren. Stel dat de speler door een muur kan kijken. Bekijk dan tegelijk de hoofdmesh, de lichaamscapsule en de first-person preview.

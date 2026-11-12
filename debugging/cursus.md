@@ -11,7 +11,7 @@ Wanneer je een gewoon spel debugt, kan je naar het scherm kijken terwijl je de b
 
 Dat maakt een eenvoudige fout soms verrassend moeilijk te onderzoeken. De speler zegt bijvoorbeeld dat hij niet verder kan wandelen. Botst de capsule tegen een muur? Staat het lichaam nog wel onder het hoofd? Is de camera al voorbij het obstakel geraakt? Vanuit het headsetbeeld alleen kan je dat niet altijd onderscheiden.
 
-In deze les bouwen we daarom een **spectator view**: een bureaubladvenster waarmee je de speler van buitenaf volgt. In een kleine inzet tonen we ook een rustiger firstpersonbeeld. Zo kan iemand in VR testen, terwijl iemand anders kijkt naar wat de verschillende onderdelen doen.
+In deze les bouwen we daarom een **spectator view**: een bureaubladvenster waarmee je de speler van buitenaf volgt. In een kleine first-person preview tonen we ook een rustiger firstpersonbeeld. Zo kan iemand in VR testen, terwijl iemand anders kijkt naar wat de verschillende onderdelen doen.
 
 We volgen de video [Godot XR Spectator View](https://www.youtube.com/watch?v=VvTLP3neEbg) van Bastiaan Olij. De eigenlijke uitleg begint rond 0:53; de korte aankondigingen ervoor zijn geen onderdeel van deze les. Er waren voor dit hoofdstuk geen voorafgaande notities. De uitwerking steunt op de hoofdstukbeschrijvingen en de [bijbehorende broncode](https://github.com/BastiaanOlij/godot4_tutorial/tree/spectator_view), aangevuld met de officiële documentatie.
 
@@ -27,9 +27,9 @@ We willen drie beelden van dezelfde wereld:
 | --- | --- | --- |
 | Het headsetbeeld | De speler | `XRCamera3D`, met de projectie van de XR-runtime. |
 | Een groot buitenaanzicht | De persoon die observeert | Een gewone `Camera3D` die naar de speler kijkt. |
-| Een kleine firstperson-inzet | De persoon die observeert | Een gewone `Camera3D` die de hoofdpose afgevlakt volgt. |
+| Een kleine first-person preview | De persoon die observeert | Een gewone `Camera3D` die de hoofdpose afgevlakt volgt. |
 
-Het buitenaanzicht laat zien waar hoofd, handen en lichaamscollider zich bevinden. De inzet helpt om dat te koppelen aan de richting waarin de speler kijkt. Het is geen exacte kopie van één oog: onze gewone camera heeft haar eigen projectie, beeldverhouding en instellingen.
+Het buitenaanzicht laat zien waar hoofd, handen en lichaamscollider zich bevinden. De first-person preview helpt om dat te koppelen aan de richting waarin de speler kijkt. Het is geen exacte kopie van één oog: onze gewone camera heeft haar eigen projectie, beeldverhouding en instellingen.
 
 We veranderen hiervoor niets aan de fysieke hoofdtracking. De echte `XRCamera3D` moet de speler rechtstreeks blijven volgen. Alleen het beeld voor de toeschouwer maken we rustiger.
 
@@ -47,7 +47,7 @@ Een camera behoort tot de dichtstbijzijnde viewport boven haar in de scèneboom.
 
 ![Editorscreenshot met CameraA buiten en CameraB binnen een SubViewport.](afbeeldingen/cameras.webp)
 
-*De twee camera's horen bij verschillende viewports. Die scheiding gebruiken we ook voor de buitencamera en de firstperson-inzet.*
+*De twee camera's horen bij verschillende viewports. Die scheiding gebruiken we ook voor de buitencamera en de first-person preview.*
 
 De zichtbare objecten hoeven we daarvoor niet te kopiëren. Viewports gebruiken een `World3D`: de gedeelde 3D-wereld waarin objecten worden geregistreerd. Een nieuwe subviewport gebruikt standaard de wereld van de bovenliggende viewport, zolang je geen eigen wereld opgeeft.
 
@@ -59,7 +59,7 @@ Dat is precies wat we nodig hebben. **We maken de spelwereld en de speler maar �
 
 Bewaar je bestaande XR-hoofdscène, bijvoorbeeld `main.tscn`. Maak daarnaast een nieuwe scène met een `Control` als root en noem die `SpectatorView`. Maak de Control schermvullend met de layoutinstelling **Full Rect**.
 
-Voeg een `SubViewport` met naam `HMD` toe en instantieer de bestaande hoofdscène daaronder. De buitencamera komt rechtstreeks onder `SpectatorView`. Voor de inzet gebruiken we een tweede subviewport, deze keer onder een `SubViewportContainer`.
+Voeg een `SubViewport` met naam `HMD` toe en instantieer de bestaande hoofdscène daaronder. De buitencamera komt rechtstreeks onder `SpectatorView`. Voor de first-person preview gebruiken we een tweede subviewport, deze keer onder een `SubViewportContainer`.
 
 ```text
 SpectatorView (Control)                       ← SpectatorView-script
@@ -107,7 +107,7 @@ Vroeger was dat misschien het hoofdvenster. Na het inpakken van de scène is het
 
 Gebruik hier niet zonder nadenken `get_tree().root` / `GetTree().Root`. Dan zou je opnieuw XR-output op het bureaubladvenster inschakelen, terwijl we dat venster net voor het spectatorbeeld willen behouden. Eventuele andere XR-specifieke viewportinstellingen, zoals VRS, horen eveneens op de HMD-viewport.
 
-Voor de hoofdviewport en de firstperson-inzet blijft `use_xr` uit. `HMD` heeft geen `SubViewportContainer` nodig: zijn uitvoer gaat via de XR-interface naar de headset. Geef deze viewport ook niet zomaar de afmetingen van onze kleine inzet; de XR-runtime bepaalt de benodigde headsetresolutie.
+Voor de hoofdviewport en de first-person preview blijft `use_xr` uit. `HMD` heeft geen `SubViewportContainer` nodig: zijn uitvoer gaat via de XR-interface naar de headset. Geef deze viewport ook niet zomaar de afmetingen van onze kleine first-person preview; de XR-runtime bepaalt de benodigde headsetresolutie.
 
 ### Welke scène start het project?
 
@@ -160,7 +160,7 @@ Geef onder **Project Settings → Layer Names → 3D Render** de eerste vier lag
 | 1 | World | Vloer, muren en andere gewone spelobjecten. |
 | 2 | HMD only | Objecten of effecten die alleen de speler moet zien. |
 | 3 | Spectator only | Headsetmodel, zichtbare capsule en debugassen. |
-| 4 | First person view only | Effecten die ook in de firstperson-inzet mogen verschijnen. |
+| 4 | First person view only | Effecten die ook in de first-person preview mogen verschijnen. |
 
 Vervolgens kiezen we deze cameramasks:
 
@@ -198,7 +198,7 @@ In de videobroncode staat ook een afzonderlijke mesh die alleen een schaduw werp
 
 ### Wat doen we met fade en vignette?
 
-Een effect met renderlagen 2 én 4 is zichtbaar in de headset en de firstperson-inzet, maar niet in de buitencamera. Dat is de indeling van de tutorialeffecten: numeriek is dat mask 10.
+Een effect met renderlagen 2 én 4 is zichtbaar in de headset en de first-person preview, maar niet in de buitencamera. Dat is de indeling van de tutorialeffecten: numeriek is dat mask 10.
 
 ```gdscript
 # Op de MeshInstance3D van een effect:
@@ -212,11 +212,11 @@ Layers = (1u << 1) | (1u << 3);
 
 De parent van de effectmesh bepaalt niet welke camera haar rendert. Een fullscreenmesh onder de XR-camera kan ook in andere camera's schermvullend verschijnen, omdat de vertexshader rechtstreeks clipcoördinaten schrijft. Daarom zijn deze lagen nodig.
 
-Voor een foutonderzoek kan je bewust een andere keuze maken: zet het effect tijdelijk alleen op laag 2 wanneer je door de inzet wil zien wat zich achter de verduistering bevindt. Het headsetbeeld blijft dan beschermd, terwijl de ontwikkelaar het probleem kan onderzoeken.
+Voor een foutonderzoek kan je bewust een andere keuze maken: zet het effect tijdelijk alleen op laag 2 wanneer je door de first-person preview wil zien wat zich achter de verduistering bevindt. Het headsetbeeld blijft dan beschermd, terwijl de ontwikkelaar het probleem kan onderzoeken.
 
-De inzet is sowieso geen exacte controle van de stereoscopische weergave. De projectiematrix van de headset en die van een gewone `Camera3D` verschillen. Beoordeel de uitlijning en het comfort van de vignette uiteindelijk in de headset.
+De first-person preview is sowieso geen exacte controle van de stereoscopische weergave. De projectiematrix van de headset en die van een gewone `Camera3D` verschillen. Beoordeel de uitlijning en het comfort van de vignette uiteindelijk in de headset.
 
-## Een kleine firstperson-inzet maken
+## Een kleine first-person preview maken
 
 *Video, 7:50–9:00.*
 
@@ -234,7 +234,7 @@ Kies bijvoorbeeld deze afmetingen:
 
 Laat **Stretch** op de container voor deze vaste opstelling uit. Staat Stretch aan, dan beheert de container de viewportgrootte en kan je die niet meer onafhankelijk instellen. Dat is ook een geldige aanpak, maar kies één systeem. Een subviewport moet in beide dimensies minstens 2 pixels groot zijn om iets weer te geven.
 
-Zet **Render Target → Update Mode** voor de inzet op **Always** en maak `StabilizedCamera` actief. Zowel de bureaubladcamera als deze camera kan tegelijk actief zijn, omdat ze tot verschillende viewports behoren.
+Zet **Render Target → Update Mode** voor de first-person preview op **Always** en maak `StabilizedCamera` actief. Zowel de bureaubladcamera als deze camera kan tegelijk actief zijn, omdat ze tot verschillende viewports behoren.
 
 Plaats onder het frame een `HSlider`; die gebruiken we straks voor de kijkhoek. De insetcamera heeft geen eigen speler, eigen collision logic of tweede kopie van `Main` nodig. Ze bekijkt dezelfde `World3D` als de andere camera's.
 
@@ -292,7 +292,7 @@ De videocode gebruikt `delta / smooth_delay` als interpolatiefactor. Onze voorbe
 
 ### Terug naar wereldcoördinaten
 
-Onze tussenwaarde staat nog in de lokale ruimte van de XR-origin. De inzetcamera heeft een andere parent. We mogen de tussenwaarde dus niet zomaar naar haar lokale `transform` kopiëren.
+Onze tussenwaarde staat nog in de lokale ruimte van de XR-origin. De first-person previewcamera heeft een andere parent. We mogen de tussenwaarde dus niet zomaar naar haar lokale `transform` kopiëren.
 
 ```gdscript
 var origin := xr_camera.get_parent() as Node3D
@@ -314,7 +314,7 @@ Nog eens: schrijf deze afgevlakte transform alleen naar de gewone insetcamera. P
 
 *Video, 10:40–11:45.*
 
-Een headset heeft een breed beeld, maar onze inzet is een klein vierkant. Wat daarin prettig leesbaar is, hangt af van wat je onderzoekt. Daarom voegt de video een slider toe voor het field of view, kortweg FOV.
+Een headset heeft een breed beeld, maar onze first-person preview is een klein vierkant. Wat daarin prettig leesbaar is, hangt af van wat je onderzoekt. Daarom voegt de video een slider toe voor het field of view, kortweg FOV.
 
 Gebruik een `HSlider` met minimum 60, maximum 120 en bijvoorbeeld stapgrootte 1. Initialiseer de slider met de huidige `fov` van de insetcamera en koppel `value_changed` aan een methode:
 
@@ -332,7 +332,7 @@ private void OnFovChanged(double value)
 }
 ```
 
-Een grotere kijkhoek toont meer van de omgeving, maar maakt objecten kleiner. Een kleinere kijkhoek toont minder, met grotere details. De betekenis als horizontale of verticale hoek hangt ook samen met `Camera3D.keep_aspect`; laat voor deze oefening de standaardinstelling staan en houd de inzet vierkant.
+Een grotere kijkhoek toont meer van de omgeving, maar maakt objecten kleiner. Een kleinere kijkhoek toont minder, met grotere details. De betekenis als horizontale of verticale hoek hangt ook samen met `Camera3D.keep_aspect`; laat voor deze oefening de standaardinstelling staan en houd de first-person preview vierkant.
 
 De slider verandert alleen onze gewone insetcamera. De headset gebruikt een door de runtime bepaalde projectie. Dit is dus geen instelling om het optische zichtveld van de headset aan te passen.
 
@@ -353,21 +353,21 @@ Maak eerst de scèneboom zoals eerder beschreven. Het root-script maakt de nodes
 | Veld op de root | Te koppelen node |
 | --- | --- |
 | `hmd` / `Hmd` | De subviewport waarin `Main` staat. |
-| `first_person_viewport` / `FirstPersonViewport` | De subviewport van de inzet. |
+| `first_person_viewport` / `FirstPersonViewport` | De subviewport van de first-person preview. |
 | `xr_camera` / `XrCamera` | De bestaande XR-camera in `Main`. |
 | `third_person_camera` / `ThirdPersonCamera` | De camera van het buitenaanzicht. |
-| `inset_camera` / `InsetCamera` | De gestabiliseerde camera in de inzet. |
+| `inset_camera` / `InsetCamera` | De gestabiliseerde camera in de first-person preview. |
 | `fov_slider` / `FovSlider` | De HSlider onder het frame. |
 
 Koppel daarnaast `target` / `Target` op de buitencamera aan het hoofd en `xr_camera` / `XrCamera` op de gestabiliseerde camera aan de XR-camera. Als `Main` een geneste scene instance is, kan **Editable Children** helpen om de juiste nodes te selecteren; je hoeft daarvoor geen tweede speler aan te maken.
 
-Het root-script stelt de gedeelde wereld, camera-cullmasks, actieve camera's en slider in. Het schakelt XR uit voor het desktopbeeld en de inzet. De bestaande opstartcode van `Main` blijft verantwoordelijk voor OpenXR en voor het inschakelen van XR op de HMD-viewport. Renderlagen van meshes stel je zelf in volgens de tabel: de scripts kunnen niet raden welke mesh een debugcapsule of een comforteffect is.
+Het root-script stelt de gedeelde wereld, camera-cullmasks, actieve camera's en slider in. Het schakelt XR uit voor het desktopbeeld en de first-person preview. De bestaande opstartcode van `Main` blijft verantwoordelijk voor OpenXR en voor het inschakelen van XR op de HMD-viewport. Renderlagen van meshes stel je zelf in volgens de tabel: de scripts kunnen niet raden welke mesh een debugcapsule of een comforteffect is.
 
 De camerabestanden gebruiken procesprioriteit 10, zodat ze na de gebruikelijke gameplay-`_process` met prioriteit 0 draaien. Heb je een eigen camerasysteem of andere prioriteiten, stem die volgorde dan af. Dit verandert niet de late pose-updates die de XR-rendering zelf kan uitvoeren; verwacht geen pixelgelijke weergave van het headsetbeeld.
 
 ## Met deze opstelling fouten onderzoeken
 
-Het doel is niet alleen een mooi beeld te maken. We willen hypotheses kunnen controleren. Stel dat de speler door een muur kan kijken. Bekijk dan tegelijk de hoofdmesh, de lichaamscapsule en de inzet.
+Het doel is niet alleen een mooi beeld te maken. We willen hypotheses kunnen controleren. Stel dat de speler door een muur kan kijken. Bekijk dan tegelijk de hoofdmesh, de lichaamscapsule en de first-person preview.
 
 Blijft de capsule bij de muur terwijl het hoofd verdergaat, dan werkt de lichaamsbotsing waarschijnlijk wel. Je moet dan de hoofdquery en fade onderzoeken. Gaat ook de capsule door de muur, controleer dan eerst de physics-collider en collision masks. Dat zijn twee verschillende problemen, ook al omschrijft de speler beide als "ik ga door de muur".
 
@@ -377,18 +377,18 @@ Bekijk tijdens het draaien ook de **Remote** scèneboom en Inspector. Daar zie j
 
 Gebruik de profiler en monitors om de belasting te vergelijken met en zonder spectatorbeelden. Dezelfde wereld delen betekent dat je de simulatie niet driemaal uitvoert, maar de extra camera's moeten wel opnieuw renderen. Stereo-XR heeft bovendien al twee oogaanzichten. Multiview en andere rendereroptimalisaties maken de kost geen eenvoudige vaste vermenigvuldiging, maar extra beelden zijn niet gratis.
 
-Begin daarom met een kleine inzet van 300 bij 300 pixels. Onderzoek afzonderlijk wat het uitschakelen van de inzet, lagere spectatorresolutie of eenvoudigere schaduwen doet. Vermijd dat een debugfunctie de headsetframerate zo sterk verlaagt dat ze het onderzochte probleem zelf veroorzaakt.
+Begin daarom met een kleine first-person preview van 300 bij 300 pixels. Onderzoek afzonderlijk wat het uitschakelen van de first-person preview, lagere spectatorresolutie of eenvoudigere schaduwen doet. Vermijd dat een debugfunctie de headsetframerate zo sterk verlaagt dat ze het onderzochte probleem zelf veroorzaakt.
 
 ## Als er iets niet zichtbaar is
 
 | Wat zie je? | Wat controleer je eerst? |
 | --- | --- |
 | De headset werkt, maar het desktopbeeld is verkeerd of verdwenen. | Staat XR alleen aan op `HMD`, en blijft het rootvenster een gewone viewport? |
-| De inzet blijft zwart of leeg. | Grootte minstens 2 × 2, update mode, actieve camera, gedeelde `World3D` en zichtbare wereldlagen. |
-| De inzet toont een andere speler of een dubbele wereld. | Is `Main` maar één keer geïnstantieerd? Staat `Own World 3D` uit? |
+| De first-person preview blijft zwart of leeg. | Grootte minstens 2 × 2, update mode, actieve camera, gedeelde `World3D` en zichtbare wereldlagen. |
+| De first-person preview toont een andere speler of een dubbele wereld. | Is `Main` maar één keer geïnstantieerd? Staat `Own World 3D` uit? |
 | De capsule is zichtbaar in de headset. | Staat de capsulemesh uitsluitend op laag 3, en bevat het headsetmask die laag niet? |
 | De buitencamera wordt plots helemaal zwart. | Renderen fade of vignette ook op een laag die de buitencamera tekent? |
-| De inzet kijkt vanaf de verkeerde plek. | Is de lokale hoofdpose met de wereldtransform van de origin gecombineerd? |
+| De first-person preview kijkt vanaf de verkeerde plek. | Is de lokale hoofdpose met de wereldtransform van de origin gecombineerd? |
 | De horizon blijft schuin. | Wordt de gewone insetcamera bijgewerkt, en is de hoofdpose niet bijna verticaal? |
 | De slider verandert niets. | Stuurt hij de gewone insetcamera aan, en is het signaal precies één keer gekoppeld? |
 | De speler ervaart vertraagde hoofdtracking. | Is stabilisatie per ongeluk op de XR-camera toegepast? Verwijder die ingreep daar. |
@@ -397,14 +397,14 @@ Een breakpoint kan de simulatie volledig stilleggen. Doe zo'n proef met de spele
 
 ## Zelf uitproberen
 
-1. Start met één vloer en één speler. Controleer dat de headset, de buitencamera en de inzet dezelfde objecten tonen.
+1. Start met één vloer en één speler. Controleer dat de headset, de buitencamera en de first-person preview dezelfde objecten tonen.
 2. Zet de debugcapsule en het hoofdmodel op laag 3. Controleer dat ze alleen in het buitenaanzicht zichtbaar zijn.
 3. Laat de speler fysiek stappen en daarna met de stick bewegen. Leg uit welke verplaatsing van lichaam en origin je verwacht en vergelijk dat met het beeld.
-4. Kantel je hoofd naar je schouder en kijk daarna omhoog. De inzet moet de horizon grotendeels recht houden, maar omhoog kijken wel behouden.
+4. Kantel je hoofd naar je schouder en kijk daarna omhoog. De first-person preview moet de horizon grotendeels recht houden, maar omhoog kijken wel behouden.
 5. Vergelijk `smooth_delay = 0.05` met `0.3`. Let zowel op de rust van het beeld als op het achterlopen.
-6. Verander de FOV van de inzet. Controleer dat de echte headsetprojectie en het buitenaanzicht daardoor niet veranderen.
-7. Test fade bij een muur. Laat het effect eerst in headset en inzet verschijnen en daarna alleen in de headset. Controleer dat het buitenaanzicht in beide gevallen bruikbaar blijft.
-8. Vergelijk de gemeten frametijd met en zonder inzet. Noteer welke configuratie je gebruikte, zodat de metingen vergelijkbaar blijven.
+6. Verander de FOV van de first-person preview. Controleer dat de echte headsetprojectie en het buitenaanzicht daardoor niet veranderen.
+7. Test fade bij een muur. Laat het effect eerst in headset en first-person preview verschijnen en daarna alleen in de headset. Controleer dat het buitenaanzicht in beide gevallen bruikbaar blijft.
+8. Vergelijk de gemeten frametijd met en zonder first-person preview. Noteer welke configuratie je gebruikte, zodat de metingen vergelijkbaar blijven.
 
 Als uitbreiding kan je tussen meerdere vaste buitencamera's schakelen. Een andere oefening is een klein paneel met de afstand tussen hoofd en lichaam, de actieve comfortinstellingen en de actuele snelheid. Laat die waarden uit de bestaande speler komen; maak voor je debugpaneel geen tweede simulatie van de beweging.
 

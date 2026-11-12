@@ -95,7 +95,7 @@ Bij onze gewone sprite loopt U van 0 links tot 1 rechts en V van 0 boven tot 1 o
 
 *Links staat de afbeelding, rechts een kleurweergave van dezelfde UV-ruimte. De hoekcoördinaten tonen dat een texturepositie van de afbeeldingsresolutie losstaat.*
 
-De bewerking `texture(TEXTURE, UV)` vraagt de kleur op de huidige texturepositie op. In Godot 4.5 is dat voor onze volgende shader niet eens nodig: de invoerwaarde van `COLOR` in `fragment()` bevat de texturekleur al, vermenigvuldigd met de modulatiekleur van de node.
+De bewerking `texture(TEXTURE, UV)` vraagt de kleur op de huidige texturepositie op. In Godot 4.5 is dat voor onze volgende shader niet eens nodig: de invoerwaarde van `COLOR` in `fragment()` bevat de texturekleur al, vermenigvuldigd met de modulatiekleur van de node (d.w.z. de kleur die in het algemeen op de node is toegepast).
 
 We kunnen die bestaande kleur dus gewoon met een kleurfilter vermenigvuldigen:
 

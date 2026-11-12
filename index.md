@@ -12,7 +12,7 @@ Deze cursus bouwt dat begrip stap voor stap op. We vertrekken van een werkend Go
 | Onderdeel | Wat leer je? |
 | --- | --- |
 | [2D-shaders](shaders/index.md) | Het verschil tussen vertex- en fragmentcode, met drie eenvoudige voorbeelden. |
-| [Debugging](debugging/index.md) | De VR-speler van buitenaf volgen met een spectator view en een gestabiliseerde inzet. |
+| [Debugging](debugging/index.md) | De VR-speler van buitenaf volgen met een spectator view en een gestabiliseerde first-person preview. |
 | [Beweging](beweging/index.md) | Fysieke en virtuele beweging combineren, botsingen controleren en comfortinstellingen begrijpen. |
 | [Objectmanipulatie](objectmanipulatie/index.md) | Voorwerpen vastnemen, plaatsen en bedienen met Godot XR Tools. |
 | [Concepten](concepten/README.md) | Achtergrond bij de wiskunde, physics, XR-invoer en rendering uit de lessen. |

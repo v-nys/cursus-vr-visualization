@@ -109,11 +109,7 @@ Voor de hoofdviewport en de first-person preview blijft `use_xr` uit. `HMD` heef
 
 ### Welke scène start het project?
 
-Stel voor desktopgebruik de spectator-scène in als **Main Scene**. `Main` zit daar al één keer in als kind van `HMD`.
-
-De video gebruikt daarnaast een `mobile`-override voor `application/run/main_scene`, zodat op de bedoelde standalone mobiele headset rechtstreeks `main.tscn` start. Dat voorkomt dat daar ook de desktopcamera's en de slider worden aangemaakt.
-
-De featuretag `mobile` betekent niet automatisch "elke headset". Een desktopheadset gebruikt nog steeds een desktopplatform. Kies de override dus volgens de platformen waarop je echt exporteert. Je kan deze werkwijze controleren in de [projectinstellingen van de video](https://raw.githubusercontent.com/BastiaanOlij/godot4_tutorial/spectator_view/project.godot).
+Bestiaan stelt verschillende main scenes in voor desktopgebruik en voor gebruik op mobiele apparaten. Voor desktopgebruik neemt hij de spectator scene en voor mobile gebruik de `Main` scene, dus de "klassieke" weergave van de wereld. Dit is vooral om ook standalone headsets te ondersteunen. We behandelen dit in een ander hoofdstuk.
 
 ## De speler van buitenaf bekijken
 
@@ -176,17 +172,13 @@ Let op: renderlagen zijn iets anders dan **physics collision layers en masks**. 
 
 Een headsetmodel onder de XR-camera kan nuttig zijn voor de toeschouwer. Zet de `MeshInstance3D`-nodes van dat model op laag 3 en haal laag 1 weg. Alleen laag 3 toevoegen is niet voldoende wanneer het model ook op een laag blijft staan die de headsetcamera tekent.
 
-In de videobroncode staat ook een afzonderlijke mesh die alleen een schaduw werpt. Daarvoor bestaat de instelling **Cast Shadow → Shadows Only**. Zo kan je een hoofdschaduw behouden zonder de eigen hoofdmesh in het headsetbeeld te tekenen. Schaduwen, lichtlagen en indirecte belichting hebben wel eigen regels: een camera-cullmask is geen algemene knop om alle invloed van een object op belichting uit te schakelen. Test het uiteindelijke resultaat met je renderer en lampen.
+Ter info: In de broncode van Bastiaan staat ook een afzonderlijke mesh die alleen een schaduw werpt. Daarvoor bestaat de instelling **Cast Shadow → Shadows Only**. Zo kan je een hoofdschaduw behouden zonder de eigen hoofdmesh in het headsetbeeld te tekenen. Schaduwen, lichtlagen en indirecte belichting hebben wel eigen regels: een camera-cullmask is geen algemene knop om alle invloed van een object op belichting uit te schakelen. Een object kan bijvoorbeeld niet gerenderd worden maar wel een invloed hebben op de belichting. Test het uiteindelijke resultaat met je renderer en lampen. (Er bestaan ook lagen voor belichting, maar zo ver gaan we nu niet.)
 
 ## Een kleine first-person preview maken
 
 *Video, 7:50–9:00.*
 
-Voeg een `ColorRect` toe als omlijsting. Plaats daarin een `SubViewportContainer`, met daaronder een `SubViewport` en een gewone `Camera3D`.
-
-![Editorscreenshot van een SubViewportContainer met een SubViewport en Camera3D.](afbeeldingen/container.webp)
-
-*De container toont de texture van zijn subviewport. Het voorbeeld uit de documentatie heeft ook een mesh in de subviewport; in onze opstelling gebruiken we de al bestaande gedeelde wereld.*
+Als je de structuur bovenaan deze pagina hebt overgenomen, heb je een `ColorRect` als omlijsting. Daarin staat een `SubViewportContainer`, met daaronder een `SubViewport` en een gewone `Camera3D`. De container toont de texture van zijn subviewport. We maken de `ColorRect` dus een klein beetje groter dan de elementen die er in horen.
 
 Kies bijvoorbeeld deze afmetingen:
 

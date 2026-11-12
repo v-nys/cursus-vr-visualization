@@ -76,9 +76,7 @@ SpectatorView (Control)                       ← SpectatorView-script
             ├── BodyCollisionShape
             └── XROrigin3D
                 ├── XRCamera3D
-                │   ├── HeadVisual (optionele mesh)
-                │   ├── Fade
-                │   └── Vignette
+                │   └── HeadVisual (optionele mesh)
                 ├── LeftHand
                 └── RightHand
 ```
@@ -149,7 +147,7 @@ De volledige scripts [third_person_camera.gd](code/gdscript/third_person_camera.
 
 *Video, 5:00–7:10.*
 
-Van buitenaf willen we zaken kunnen zien die voor de speler storend zijn: een model van de headset, de lichaamscapsule of de gekleurde assen uit de tutorial. Omgekeerd willen we niet dat een zwart fadevlak de volledige buitenwereld afdekt.
+Van buitenaf willen we zaken kunnen zien die voor de speler storend zijn: een model van de headset, de lichaamscapsule of de gekleurde assen uit de tutorial. Omgekeerd willen we niet dat een full-screen effect zoals een zwart fadevlak de volledige buitenwereld afdekt.
 
 Daarvoor gebruiken we **3D-renderlagen** en het **Cull Mask** van elke camera. Een `MeshInstance3D` kan op verschillende visual layers staan. Een camera tekent die mesh wanneer minstens één van die lagen in haar mask ingeschakeld is.
 
@@ -170,23 +168,7 @@ Vervolgens kiezen we deze cameramasks:
 | `ThirdPersonCamera` | 1 en 3 | `1 + 4 = 5` |
 | `StabilizedCamera` | 1 en 4 | `1 + 8 = 9` |
 
-Waarom wordt laag 3 hier waarde 4? Een mask gebruikt bits. Het eerste bit is 1, het tweede 2, het derde 4 en het vierde 8. De waarde is dus geen laagnummer.
-
-Je kan de instellingen in de Inspector zetten of via code. Met deze methoden gebruik je wel gewoon de laagnummers van 1 tot 20:
-
-```gdscript
-# Voorbeeld: alleen wereld en spectatorhulpmiddelen tonen.
-cull_mask = 0
-set_cull_mask_value(1, true)
-set_cull_mask_value(3, true)
-```
-
-```csharp
-// In het script van de buitencamera.
-CullMask = 0;
-SetCullMaskValue(1, true);
-SetCullMaskValue(3, true);
-```
+De binaire waarden zijn vooral belangrijk wanneer je zichtbaarheid in code wil instellen.
 
 Let op: renderlagen zijn iets anders dan **physics collision layers en masks**. Als je een capsulemesh onzichtbaar maakt voor de headset, blijft de bijbehorende collision shape gewoon botsen. Dat is precies de bedoeling.
 
@@ -195,26 +177,6 @@ Let op: renderlagen zijn iets anders dan **physics collision layers en masks**. 
 Een headsetmodel onder de XR-camera kan nuttig zijn voor de toeschouwer. Zet de `MeshInstance3D`-nodes van dat model op laag 3 en haal laag 1 weg. Alleen laag 3 toevoegen is niet voldoende wanneer het model ook op een laag blijft staan die de headsetcamera tekent.
 
 In de videobroncode staat ook een afzonderlijke mesh die alleen een schaduw werpt. Daarvoor bestaat de instelling **Cast Shadow → Shadows Only**. Zo kan je een hoofdschaduw behouden zonder de eigen hoofdmesh in het headsetbeeld te tekenen. Schaduwen, lichtlagen en indirecte belichting hebben wel eigen regels: een camera-cullmask is geen algemene knop om alle invloed van een object op belichting uit te schakelen. Test het uiteindelijke resultaat met je renderer en lampen.
-
-### Wat doen we met fade en vignette?
-
-Een effect met renderlagen 2 én 4 is zichtbaar in de headset en de first-person preview, maar niet in de buitencamera. Dat is de indeling van de tutorialeffecten: numeriek is dat mask 10.
-
-```gdscript
-# Op de MeshInstance3D van een effect:
-layers = (1 << 1) | (1 << 3)
-```
-
-```csharp
-// Op de MeshInstance3D van een effect:
-Layers = (1u << 1) | (1u << 3);
-```
-
-De parent van de effectmesh bepaalt niet welke camera haar rendert. Een fullscreenmesh onder de XR-camera kan ook in andere camera's schermvullend verschijnen, omdat de vertexshader rechtstreeks clipcoördinaten schrijft. Daarom zijn deze lagen nodig.
-
-Voor een foutonderzoek kan je bewust een andere keuze maken: zet het effect tijdelijk alleen op laag 2 wanneer je door de first-person preview wil zien wat zich achter de verduistering bevindt. Het headsetbeeld blijft dan beschermd, terwijl de ontwikkelaar het probleem kan onderzoeken.
-
-De first-person preview is sowieso geen exacte controle van de stereoscopische weergave. De projectiematrix van de headset en die van een gewone `Camera3D` verschillen. Beoordeel de uitlijning en het comfort van de vignette uiteindelijk in de headset.
 
 ## Een kleine first-person preview maken
 

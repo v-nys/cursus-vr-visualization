@@ -222,6 +222,8 @@ Hier behouden we zowel links/rechts kijken als omhoog/omlaag kijken. In de oorsp
 
 Wanneer de speler recht omhoog of omlaag kijkt, is een horizon niet eenduidig af te leiden. De volledige voorbeelden behouden in dat geval de oriëntatie. Dat vermijdt een ongeldige `looking_at`.
 
+Je kan op dit moment de code al aanpassen zodat de preview de echte camera volgt, al zijn er wel nog verbeteringen mogelijk.
+
 ### Beweging en rotatie afvlakken
 
 We willen niet dat de first-personcamera even veel schudt als een VR-headset. Het valt misschien niet zo wanneer je een headset op hebt, maar eigenlijk schudden we voortdurend een beetje met ons hoofd. Als we dat soort effect zien op een scherm dat zelf stil hangt, kan dat misselijkheid opleveren.
@@ -229,18 +231,20 @@ We willen niet dat de first-personcamera even veel schudt als een VR-headset. He
 We zullen dus zowel de translatie als de rotatie van onze XRCamera3D geleidelijk bijbenen. Voor de positie gebruiken we `lerp`; voor de basis gebruiken we `slerp`. Die eerste "vervormt" een vector geleidelijk terwijl die tweede hem in de eerste plaats "roteert".
 
 ```gdscript
-var weight := 1.0 - delta / smooth_delay
+var weight := 1.0 - exp(-delta / max(smooth_delay, 0.001))
 previous.origin = previous.origin.lerp(adjusted.origin, weight)
 previous.basis = previous.basis.slerp(adjusted.basis, weight)
 ```
 
 ```csharp
-float weight = 1.0f - (float)delta / SmoothDelay
+float weight = 1.0f - Mathf.Exp(-(float)delta / Mathf.Max(SmoothDelay, 0.001f));
 previous.Origin = previous.Origin.Lerp(adjusted.Origin, weight);
 previous.Basis = previous.Basis.Slerp(adjusted.Basis, weight);
 ```
 
-`smooth_delay` is hier een tijdconstante. Een grotere waarde geeft een trager beeld dat verder achterloopt. We houden onze nieuwe oorsprong en basis (voor translatie en rotatie) bij in variabelen, omdat we in het volgende frame opnieuw vanaf deze waarden willen gaan interpoleren. Voor het allereerste frame nemen we gewoon de waarde zonder interpolatie.
+Het idee achter het gewicht is als volgt: `weight` drukt een percentage uit als waarde tussen 0 en 1. Hoe hoger dat percentage, hoe zwaarder de "target" vector doorweegt. We willen dus dat het gewicht laag is voor kleine waarden van `delta` en hoog voor hoge waarden van `delta`, maar het moet wel een waarde tussen 0 en 1 blijven. We kunnen dit doen door het uit te drukken als "1 - een getal tussen 0 en 1 dat laag ligt voor hoge waarden van delta en hoog voor lage waarden". Negatieve machtsverheffing is hier geschikt voor: `exp(1)` is de wiskundige constante `e` (ongeveer 2.72), `exp(0)` is 1 en `exp(-1)` is 1 / 2.72. Dus een negatieve macht ligt tussen 0 en 1 en ze wordt kleiner naarmate de absolute waarde van het argument groter wordt.
+
+We houden onze nieuwe oorsprong en basis (voor translatie en rotatie) bij in variabelen, omdat we in het volgende frame opnieuw vanaf deze waarden willen gaan interpoleren. Voor het allereerste frame nemen we gewoon de waarde zonder interpolatie.
 
 ### Terug naar wereldcoördinaten
 

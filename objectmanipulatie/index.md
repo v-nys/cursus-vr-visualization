@@ -6,8 +6,6 @@ section_url: /objectmanipulatie/
 
 # Objectmanipulatie
 
-Een voorwerp vastnemen is het begin. We onderzoeken ook hoe je het correct oriënteert, in een houder plaatst en bedient.
+Neem een kubus vast, hang een bijl op een gereedschapsbord en laat een vastgeklikt voorwerp meebewegen met zijn snapzone. De les volgt delen 2 en 3 van de Godot XR Tools-reeks van Bastiaan Olij.
 
-Lees de [uitgewerkte les](cursus.md). De les volgt de vier video's van Bastiaan Olij, maar gebruikt **Godot 4.5 en Godot XR Tools 4.5.1**.
-
-De [videolinks](links.md), [codevoorbeelden](code/index.md) en [afbeeldingsbronnen](afbeeldingen/BRONNEN.md) staan afzonderlijk klaar. Achtergrond vind je bij de [concepten over objectmanipulatie](../concepten/README.md#objectmanipulatie).
+[Lees de les](cursus.md) · [Bronvideo's](links.md) · [Afbeeldingsbronnen](afbeeldingen/BRONNEN.md)
